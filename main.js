@@ -184,6 +184,27 @@ document.addEventListener('DOMContentLoaded', () => {
     createSlider('exp-track',  'exp-prev',  'exp-next',  'exp-counter');
     // ─────────────────────────────────────────────────────────────────────────
 
+    // ─── Hamburger Menu ───────────────────────────────────────────────────────
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
+
+    if (hamburgerBtn && mobileNavOverlay) {
+        hamburgerBtn.addEventListener('click', () => {
+            hamburgerBtn.classList.toggle('active');
+            mobileNavOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileNavOverlay.classList.contains('active') ? 'hidden' : '';
+        });
+
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburgerBtn.classList.remove('active');
+                mobileNavOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+    }
+    // ─────────────────────────────────────────────────────────────────────────
+
     // ─── Interatividade da Seção "Não é Normal" ────────────────────────────────
     const symptomItems = document.querySelectorAll('.symptom-item');
     const symptomMsg = document.getElementById('symptom-dynamic-text');
