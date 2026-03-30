@@ -1,0 +1,10 @@
+# Pastas ignoradas
+.tmp/
+__pycache__/
+
+# Variáveis de ambiente
+.env
+
+# Credenciais
+credentials.json
+token.json
