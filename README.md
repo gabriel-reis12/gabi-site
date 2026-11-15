@@ -35,3 +35,12 @@ O primeiro comando verifica estrutura HTML, referências locais, âncoras, conte
 As fontes usam Google Fonts com `display=swap` e fallbacks locais. A fonte remota pode ser bloqueada sem impedir o acesso ao conteúdo. Não há analytics, formulário, backend ou dependências de runtime adicionadas.
 
 Nenhum deploy foi realizado.
+
+## SEO
+
+Endereço atual confirmado: `https://gabriela-sarra-psico.vercel.app/`.
+Título e descrição, canonical, Open Graph, Twitter Card, dados estruturados Person, robots.txt e sitemap.xml configurados. Os dados profissionais são os já publicados no conteúdo; não foram adicionados endereço físico, avaliações ou promessas de resultados.
+
+Ao trocar o domínio, atualizar todas as ocorrências do endereço em `index.html`, `robots.txt`, `sitemap.xml` e nesta documentação. Configurar redirecionamento permanente do domínio anterior na hospedagem e cadastrar o sitemap no Google Search Console com acesso do proprietário. O commit não efetua cadastro no Search Console nem garante indexação.
+
+Referências: [canonical](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls) e [dados estruturados](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data) do Google Search Central.

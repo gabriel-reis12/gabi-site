@@ -10,7 +10,7 @@ const server = createServer(async (req, res) => {
         const pathname = decodeURIComponent(new URL(req.url, 'http://127.0.0.1').pathname);
         const relative = pathname === '/' ? 'index.html' : pathname.slice(1);
         // Preview only public site files; never serve the checkout's private state.
-        const allowed = ['index.html', 'styles.css', 'main.js'].includes(relative) || /^(Imagens\/|components\/|fonts\/|vendor\/)/.test(relative);
+        const allowed = ['index.html', 'styles.css', 'main.js', 'robots.txt', 'sitemap.xml'].includes(relative) || /^(Imagens\/|components\/|fonts\/|vendor\/)/.test(relative);
         const target = resolve(root, relative);
         if (!allowed || !target.startsWith(root + sep) || relative.split('/').some(part => part.startsWith('.'))) {
             res.writeHead(404).end('Not found');
@@ -18,7 +18,8 @@ const server = createServer(async (req, res) => {
         }
         if (!['GET', 'HEAD'].includes(req.method)) { res.writeHead(405).end(); return; }
         const body = await readFile(target);
-        res.writeHead(200, { 'Content-Type': types[extname(target)] || 'application/octet-stream', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' });
+        const seoType = { '.txt': 'text/plain; charset=utf-8', '.xml': 'application/xml; charset=utf-8' };
+        res.writeHead(200, { 'Content-Type': types[extname(target)] || seoType[extname(target)] || 'application/octet-stream', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' });
         res.end(req.method === 'HEAD' ? undefined : body);
     } catch { res.writeHead(404).end('Not found'); }
 });

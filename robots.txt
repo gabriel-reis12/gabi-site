@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gabriela-sarra-psico.vercel.app/sitemap.xml
