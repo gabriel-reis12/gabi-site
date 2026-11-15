@@ -41,7 +41,7 @@ test('computeDrawRect uses full-bleed cover on landscape and preserves brain on 
 
     const mobileEarly = computeDrawRect(390, 700, 720, 405, 0);
     assert.equal(mobileEarly.featherEdges, true);
-    assert.ok(mobileEarly.dw < 500, 'Portrait early frame should avoid severe horizontal cropping');
+    assert.ok(mobileEarly.dw < 650, 'Portrait early frame should avoid severe horizontal cropping');
 
     const mobileInterior = computeDrawRect(390, 700, 720, 405, 0.55);
     assert.ok(mobileInterior.dw > mobileEarly.dw, 'Interior neural frames smoothly expand');

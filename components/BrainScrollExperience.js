@@ -31,8 +31,9 @@ function smoothstep(t) {
 
 /**
  * Computes destination rectangle on Canvas 2D.
- * Landscape uses full-bleed cover; portrait preserves the full brain geometry
- * in early frames and smoothly widens into the neural interior as scroll progresses.
+ * Landscape uses full-bleed cover; portrait mobile uses a generous focal framing
+ * (~1.56x contain) that keeps 100% of the brain visible on frame 001 while filling
+ * the upper-middle stage cleanly above the editorial text.
  */
 export function computeDrawRect(canvasWidth, canvasHeight, imageWidth, imageHeight, progress = 0) {
     if (!canvasWidth || !canvasHeight || !imageWidth || !imageHeight) {
@@ -54,15 +55,15 @@ export function computeDrawRect(canvasWidth, canvasHeight, imageWidth, imageHeig
 
     const containScale = canvasWidth / imageWidth;
     const coverScale = canvasHeight / imageHeight;
-    const initialScale = containScale * 1.24;
-    const interiorScale = Math.max(initialScale, coverScale);
-    const zoomBlend = smoothstep((progress - 0.16) / 0.36);
+    const initialScale = containScale * 1.56;
+    const interiorScale = Math.max(initialScale, Math.min(coverScale * 0.94, containScale * 2.25));
+    const zoomBlend = smoothstep((progress - 0.14) / 0.4);
     const scale = initialScale + (interiorScale - initialScale) * zoomBlend;
     const dw = imageWidth * scale;
     const dh = imageHeight * scale;
     return {
         dx: (canvasWidth - dw) / 2,
-        dy: (canvasHeight - dh) * 0.4,
+        dy: (canvasHeight - dh) * 0.34,
         dw,
         dh,
         featherEdges: dh < canvasHeight - 2
@@ -71,7 +72,8 @@ export function computeDrawRect(canvasWidth, canvasHeight, imageWidth, imageHeig
 
 /**
  * Builds an ordered list of frame indices for stratified preloading:
- * frame 0 first, then evenly spaced keyframes, then remaining frames.
+ * frame 0 and last frame first, then dyadic strata (16, 8, 4, 2, 1) so all even frames
+ * are ready in half the time before filling odd frames.
  */
 export function buildPreloadOrder(frameCount) {
     const order = [];
@@ -84,7 +86,7 @@ export function buildPreloadOrder(frameCount) {
     };
     push(0);
     push(frameCount - 1);
-    for (const step of [24, 12, 6, 3, 1]) {
+    for (const step of [16, 8, 4, 2, 1]) {
         for (let i = 0; i < frameCount; i += step) push(i);
     }
     return order;
@@ -98,7 +100,7 @@ export class FrameSequenceStore {
         frameCount = DEFAULT_FRAME_COUNT,
         getUrl,
         maxDecoded = 64,
-        maxConcurrent = 4,
+        maxConcurrent = 6,
         onFrameReady
     }) {
         this.frameCount = frameCount;
@@ -190,9 +192,8 @@ export class FrameSequenceStore {
     }
 
     #pickNextQueueIndex() {
-        // Prioritize frames right around the current scroll target in scroll direction.
         const windowOffsets = [];
-        for (let d = 0; d <= 18; d++) {
+        for (let d = 0; d <= 16; d++) {
             windowOffsets.push(this.targetFrame + d * this.scrollDirection);
             if (d > 0 && d <= 8) windowOffsets.push(this.targetFrame - d * this.scrollDirection);
         }
@@ -375,6 +376,7 @@ export function createBrainScrollExperience(root, options = {}) {
     }
 
     gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.config?.({ ignoreMobileResize: true });
 
     const mobileMq = window.matchMedia(mobileBreakpoint);
     const connection = navigator.connection;
@@ -385,6 +387,7 @@ export function createBrainScrollExperience(root, options = {}) {
     let resizeObserver = null;
     let currentProgress = 0;
     let currentTargetFrame = 0;
+    let lastWindowWidth = window.innerWidth || 0;
     let canvasSize = { width: 0, height: 0, dpr: 1 };
     let lastDrawState = { frame: -1, actualFrame: -1, width: 0, height: 0, progressKey: -1 };
     let rafPending = false;
@@ -416,16 +419,57 @@ export function createBrainScrollExperience(root, options = {}) {
         canvasSize = { width, height, dpr };
     };
 
-    const drawFrame = (force = false) => {
-        if (disposed || !store) return;
+    const paintDrawable = (drawable, imgWidth, imgHeight) => {
         const { width, height, dpr } = canvasSize;
+        if (!width || !height || !imgWidth || !imgHeight) return;
+
+        ctx.save();
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.fillStyle = '#100c0a';
+        ctx.fillRect(0, 0, width, height);
+
+        const rect = computeDrawRect(width, height, imgWidth, imgHeight, currentProgress);
+        ctx.drawImage(drawable, rect.dx, rect.dy, rect.dw, rect.dh);
+
+        if (rect.featherEdges) {
+            const topEdge = rect.dy;
+            const bottomEdge = rect.dy + rect.dh;
+            const featherHeight = Math.max(32, rect.dh * 0.26);
+
+            const topGrad = ctx.createLinearGradient(0, topEdge, 0, topEdge + featherHeight);
+            topGrad.addColorStop(0, 'rgba(16, 12, 10, 1)');
+            topGrad.addColorStop(0.55, 'rgba(16, 12, 10, 0.35)');
+            topGrad.addColorStop(1, 'rgba(16, 12, 10, 0)');
+            ctx.fillStyle = topGrad;
+            ctx.fillRect(0, Math.max(0, topEdge - 2), width, featherHeight + 2);
+
+            const botGrad = ctx.createLinearGradient(0, bottomEdge - featherHeight, 0, bottomEdge);
+            botGrad.addColorStop(0, 'rgba(16, 12, 10, 0)');
+            botGrad.addColorStop(0.45, 'rgba(16, 12, 10, 0.35)');
+            botGrad.addColorStop(1, 'rgba(16, 12, 10, 1)');
+            ctx.fillStyle = botGrad;
+            ctx.fillRect(0, bottomEdge - featherHeight, width, featherHeight + 4);
+        }
+        ctx.restore();
+    };
+
+    const drawFrame = (force = false) => {
+        if (disposed) return;
+        const { width, height } = canvasSize;
         if (!width || !height) return;
 
         const targetIndex = progressToFrameIndex(currentProgress, frameCount);
-        const best = store.getBestAvailableFrame(targetIndex);
-        if (!best) return;
+        const best = store?.getBestAvailableFrame(targetIndex);
+        if (!best) {
+            if (poster?.complete && poster.naturalWidth > 0) {
+                paintDrawable(poster, poster.naturalWidth, poster.naturalHeight);
+                canvas.classList.add('is-ready');
+                poster.classList.add('is-hidden');
+            }
+            return;
+        }
 
-        const progressKey = canvasSize.width / canvasSize.height < 1.05 ? Math.round(currentProgress * 120) : 0;
+        const progressKey = width / height < 1.05 ? Math.round(currentProgress * 100) : 0;
         if (
             !force &&
             lastDrawState.frame === targetIndex &&
@@ -438,33 +482,7 @@ export function createBrainScrollExperience(root, options = {}) {
         }
 
         lastDrawState = { frame: targetIndex, actualFrame: best.index, width, height, progressKey };
-
-        ctx.save();
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        ctx.fillStyle = '#100c0a';
-        ctx.fillRect(0, 0, width, height);
-
-        const rect = computeDrawRect(width, height, best.entry.width, best.entry.height, currentProgress);
-        ctx.drawImage(best.entry.drawable, rect.dx, rect.dy, rect.dw, rect.dh);
-
-        if (rect.featherEdges) {
-            const topEdge = rect.dy;
-            const bottomEdge = rect.dy + rect.dh;
-            const featherHeight = Math.max(24, rect.dh * 0.22);
-
-            const topGrad = ctx.createLinearGradient(0, topEdge, 0, topEdge + featherHeight);
-            topGrad.addColorStop(0, 'rgba(16, 12, 10, 1)');
-            topGrad.addColorStop(1, 'rgba(16, 12, 10, 0)');
-            ctx.fillStyle = topGrad;
-            ctx.fillRect(0, Math.max(0, topEdge - 2), width, featherHeight + 2);
-
-            const botGrad = ctx.createLinearGradient(0, bottomEdge - featherHeight, 0, bottomEdge);
-            botGrad.addColorStop(0, 'rgba(16, 12, 10, 0)');
-            botGrad.addColorStop(1, 'rgba(16, 12, 10, 1)');
-            ctx.fillStyle = botGrad;
-            ctx.fillRect(0, bottomEdge - featherHeight, width, featherHeight + 4);
-        }
-        ctx.restore();
+        paintDrawable(best.entry.drawable, best.entry.width, best.entry.height);
     };
 
     const scheduleDraw = (force = false) => {
@@ -484,21 +502,26 @@ export function createBrainScrollExperience(root, options = {}) {
     const initStore = isMobile => {
         store?.destroy();
         const template = isMobile || connection?.saveData ? mobilePath : desktopPath;
-        const maxDecoded = isMobile ? 36 : 72;
-        const maxConcurrent = connection?.saveData ? 2 : (isMobile ? 3 : 4);
+        const maxDecoded = isMobile ? 42 : 76;
+        const maxConcurrent = connection?.saveData ? 3 : (isMobile ? 6 : 8);
         store = new FrameSequenceStore({
             frameCount,
             getUrl: idx => getFrameUrl(template, idx),
             maxDecoded,
             maxConcurrent,
             onFrameReady: idx => {
-                if (idx === 0 && poster) {
+                if (idx === 0) {
                     canvas.classList.add('is-ready');
-                    poster.classList.add('is-hidden');
+                    poster?.classList.add('is-hidden');
                 }
                 scheduleDraw(false);
             }
         });
+        if (poster?.complete && poster.naturalWidth > 0) {
+            scheduleDraw(true);
+        } else {
+            poster?.addEventListener?.('load', () => scheduleDraw(true), { once: true });
+        }
         void store.loadPriorityFrame(0).then(entry => {
             if (!disposed && entry) {
                 resizeCanvas();
@@ -556,13 +579,18 @@ export function createBrainScrollExperience(root, options = {}) {
                 beats.forEach((beat, idx) => {
                     gsap.set(beat, {
                         opacity: idx === 0 ? 1 : 0,
-                        y: idx === 0 ? 0 : 20,
+                        y: idx === 0 ? 0 : 18,
                         visibility: 'visible'
                     });
                 });
                 if (veil) gsap.set(veil, { opacity: 0 });
                 if (progressBar) gsap.set(progressBar, { scaleX: 0, transformOrigin: 'left center' });
                 if (cue) gsap.set(cue, { opacity: 1, y: 0 });
+
+                const getStableStageHeight = () => {
+                    const h = stage.getBoundingClientRect().height || window.innerHeight || 720;
+                    return Math.max(440, Math.round(h));
+                };
 
                 const frameProxy = { progress: 0 };
                 const tl = gsap.timeline({
@@ -573,9 +601,9 @@ export function createBrainScrollExperience(root, options = {}) {
                         anticipatePin: 1,
                         invalidateOnRefresh: true,
                         fastScrollEnd: true,
-                        scrub: isMobile ? 0.35 : 0.5,
+                        scrub: isMobile ? 0.2 : 0.45,
                         start: () => `top ${getHeaderOffset()}px`,
-                        end: () => `+=${Math.round(window.innerHeight * (isMobile ? 1.65 : 2.6))}`,
+                        end: () => `+=${Math.round(getStableStageHeight() * (isMobile ? 1.48 : 2.55))}`,
                         onRefresh: () => {
                             syncStageHeight();
                             resizeCanvas();
@@ -593,7 +621,6 @@ export function createBrainScrollExperience(root, options = {}) {
                     }
                 });
 
-                // Unified 0 -> 1 timeline mapping
                 tl.to(frameProxy, { progress: 1, duration: 1, ease: 'none' }, 0);
 
                 if (progressBar) {
@@ -605,33 +632,31 @@ export function createBrainScrollExperience(root, options = {}) {
 
                 // Beat 0: 0% to 30%
                 if (beats[0]) {
-                    tl.to(beats[0], { opacity: 0, y: -18, duration: 0.09, ease: 'power2.inOut' }, 0.21);
+                    tl.to(beats[0], { opacity: 0, y: -16, duration: 0.09, ease: 'power2.inOut' }, 0.21);
                 }
                 // Beat 1: 30% to 70%
                 if (beats[1]) {
                     tl.fromTo(
                         beats[1],
-                        { opacity: 0, y: 20 },
+                        { opacity: 0, y: 18 },
                         { opacity: 1, y: 0, duration: 0.08, ease: 'power2.out' },
                         0.30
-                    ).to(beats[1], { opacity: 0, y: -18, duration: 0.08, ease: 'power2.in' }, 0.61);
+                    ).to(beats[1], { opacity: 0, y: -16, duration: 0.08, ease: 'power2.in' }, 0.61);
                 }
                 // Beat 2: 70% to 100%
                 if (beats[2]) {
                     tl.fromTo(
                         beats[2],
-                        { opacity: 0, y: 20 },
+                        { opacity: 0, y: 18 },
                         { opacity: 1, y: 0, duration: 0.08, ease: 'power2.out' },
                         0.70
                     ).to(beats[2], { opacity: 0, y: -12, duration: 0.08, ease: 'power2.in' }, 0.91);
                 }
 
-                // Soft color bridge into Gabriela Sarra's presentation at the final frames
                 if (veil) {
-                    tl.to(veil, { opacity: 0.78, duration: 0.14, ease: 'power1.inOut' }, 0.86);
+                    tl.to(veil, { opacity: 0.8, duration: 0.14, ease: 'power1.inOut' }, 0.86);
                 }
 
-                // Final transition into Gabriela Sarra's Hero presentation
                 let heroTimeline = null;
                 if (heroSection) {
                     const heroCopy = heroSection.querySelector('.hero-copy');
@@ -642,9 +667,9 @@ export function createBrainScrollExperience(root, options = {}) {
                     heroTimeline = gsap.timeline({
                         scrollTrigger: {
                             trigger: heroSection,
-                            start: 'top 92%',
-                            end: 'top 28%',
-                            scrub: 0.45,
+                            start: isMobile ? 'top 95%' : 'top 92%',
+                            end: isMobile ? 'top 55%' : 'top 28%',
+                            scrub: isMobile ? 0.25 : 0.45,
                             invalidateOnRefresh: true
                         }
                     });
@@ -652,7 +677,7 @@ export function createBrainScrollExperience(root, options = {}) {
                     if (heroCopy) {
                         heroTimeline.fromTo(
                             heroCopy,
-                            { opacity: 0.28, y: 26 },
+                            { opacity: isMobile ? 0.55 : 0.28, y: isMobile ? 16 : 26 },
                             { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
                             0
                         );
@@ -660,7 +685,7 @@ export function createBrainScrollExperience(root, options = {}) {
                     if (heroPortrait) {
                         heroTimeline.fromTo(
                             heroPortrait,
-                            { opacity: 0.2, scale: 1.05, y: 24 },
+                            { opacity: isMobile ? 0.45 : 0.2, scale: 1.04, y: isMobile ? 16 : 24 },
                             { opacity: 1, scale: 1, y: 0, duration: 1, ease: 'power2.out' },
                             0
                         );
@@ -668,7 +693,7 @@ export function createBrainScrollExperience(root, options = {}) {
                     if (portraitOutline) {
                         heroTimeline.fromTo(
                             portraitOutline,
-                            { opacity: 0, scale: 0.96 },
+                            { opacity: 0, scale: 0.97 },
                             { opacity: 1, scale: 1, duration: 0.9, ease: 'power2.out' },
                             0.1
                         );
@@ -698,6 +723,11 @@ export function createBrainScrollExperience(root, options = {}) {
 
     const handleViewportChange = () => {
         if (disposed) return;
+        const nextWidth = window.innerWidth || 0;
+        if (mobileMq.matches && Math.abs(nextWidth - lastWindowWidth) < 2) {
+            return;
+        }
+        lastWindowWidth = nextWidth;
         syncStageHeight();
         resizeCanvas();
         scheduleDraw(true);
