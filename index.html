@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#100C0A">
+    <link rel="icon" href="data:,">
     <title>Dra. Gabriela Sarra | Psicóloga Clínica</title>
     <meta name="description" content="Psicóloga clínica focada em neurodesenvolvimento (ABA) e intervenções para TEA. Atendimento online especializado.">
     <meta property="og:title" content="Dra. Gabriela Sarra | Psicóloga Clínica">
@@ -14,13 +15,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script defer src="vendor/gsap/gsap.min.js"></script>
+    <script defer src="vendor/gsap/ScrollTrigger.min.js"></script>
     <script src="main.js" type="module"></script>
 </head>
 <body>
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
     <header class="site-header">
         <div class="container header-inner">
-            <a class="brand" href="#inicio" aria-label="Gabriela Sarra — início"><span class="brand-name">Gabriela Sarra<span class="brand-dot">.</span></span><span class="brand-description">Psicóloga clínica · CRP 06/215390</span></a>
+            <a class="brand" href="#jornada" aria-label="Gabriela Sarra — início"><span class="brand-name">Gabriela Sarra<span class="brand-dot">.</span></span><span class="brand-description">Psicóloga clínica · CRP 06/215390</span></a>
             <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav" hidden><span class="menu-label">Menu</span><span class="menu-lines" aria-hidden="true"></span></button>
             <nav id="site-nav" class="site-nav" aria-label="Navegação principal">
                 <a href="#sobre">Sobre mim</a><a href="#abordagem">Abordagem</a><a href="#atendimento">Atendimento</a><a href="#duvidas">Dúvidas</a>
@@ -29,6 +32,49 @@
         </div>
     </header>
     <main id="conteudo" tabindex="-1">
+        <section class="brain-journey" id="jornada" data-brain-journey aria-labelledby="journey-title-1">
+            <div class="brain-journey-stage" data-brain-stage>
+                <img
+                    class="brain-journey-poster"
+                    src="Imagens/optimized/intro-desktop/frame-001.webp"
+                    srcset="Imagens/optimized/intro-mobile/frame-001.webp 720w, Imagens/optimized/intro-desktop/frame-001.webp 1280w"
+                    sizes="100vw"
+                    width="1280"
+                    height="720"
+                    alt="Cérebro geométrico iluminado em tons champagne e bronze sobre fundo escuro"
+                    fetchpriority="high"
+                    decoding="async"
+                >
+                <canvas class="brain-journey-canvas" data-brain-canvas aria-hidden="true"></canvas>
+                <div class="brain-journey-scrim" aria-hidden="true"></div>
+                <div class="brain-journey-veil" data-brain-veil aria-hidden="true"></div>
+                <div class="container brain-journey-overlay">
+                    <div class="brain-journey-beats">
+                        <article class="journey-beat is-active" data-beat="0">
+                            <p class="eyebrow"><span class="small-rule" aria-hidden="true"></span> The Inner Journey</p>
+                            <h2 id="journey-title-1">Cada mente tem sua própria <em>história.</em></h2>
+                        </article>
+                        <article class="journey-beat" data-beat="1">
+                            <p class="eyebrow"><span class="small-rule" aria-hidden="true"></span> Conexões e escuta</p>
+                            <h2>Compreender é o primeiro passo para <em>transformar.</em></h2>
+                        </article>
+                        <article class="journey-beat" data-beat="2">
+                            <p class="eyebrow"><span class="small-rule" aria-hidden="true"></span> Cuidado clínico</p>
+                            <h2>Um espaço para <em>olhar para dentro.</em></h2>
+                        </article>
+                    </div>
+                    <div class="brain-journey-footer">
+                        <div class="journey-progress" aria-hidden="true">
+                            <span class="journey-progress-bar" data-brain-progress></span>
+                        </div>
+                        <div class="journey-controls">
+                            <span class="journey-scroll-cue" data-brain-cue>Role para percorrer <span aria-hidden="true">↓</span></span>
+                            <a class="text-link journey-skip" href="#inicio">Ir para a apresentação <span aria-hidden="true">↓</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <section class="hero" id="inicio" aria-labelledby="hero-title">
             <div class="container hero-grid">
                 <div class="hero-copy">
@@ -139,7 +185,7 @@
             <div><h2>Explore</h2><a href="#sobre">Sobre mim</a><a href="#formacao">Formação acadêmica</a><a href="#experiencia">Experiência profissional</a><a href="#duvidas">Perguntas frequentes</a></div>
             <div class="footer-contact"><h2>Vamos conversar</h2><a href="https://wa.me/5519993730000" target="_blank" rel="noopener noreferrer">+55 19 99373-0000 <span aria-hidden="true">↗</span><span class="sr-only"> WhatsApp (abre em nova aba)</span></a><a href="mailto:gabysarra23@gmail.com">gabysarra23@gmail.com</a><p>Atendimento exclusivamente online<br>CRP 06/215390</p></div>
         </div>
-        <div class="container footer-bottom"><p>© 2026 Dra. Gabriela Sarra. Todos os direitos reservados.</p><a href="#inicio">Voltar ao início <span aria-hidden="true">↑</span></a></div>
+        <div class="container footer-bottom"><p>© 2026 Dra. Gabriela Sarra. Todos os direitos reservados.</p><a href="#jornada">Voltar ao início <span aria-hidden="true">↑</span></a></div>
     </footer>
 </body>
 </html>

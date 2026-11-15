@@ -19,7 +19,7 @@ for (const [, anchor] of html.matchAll(/href="#([^"]+)"/g)) assert.ok(ids.includ
 for (const [, labels] of html.matchAll(/aria-(?:labelledby|controls)="([^"]+)"/g)) {
     for (const id of labels.split(' ')) assert.ok(ids.includes(id), `Missing ARIA target: ${id}`);
 }
-const localPaths = new Set([...html.matchAll(/(?:src|href)="([^"#]+)"/g)].map(match => match[1]).filter(path => !/^(https?:|mailto:)/.test(path)));
+const localPaths = new Set([...html.matchAll(/(?:src|href)="([^"#]+)"/g)].map(match => match[1]).filter(path => !/^(https?:|mailto:|data:)/.test(path)));
 for (const [, set] of html.matchAll(/srcset="([^"]+)"/g)) {
     for (const candidate of set.split(',')) localPaths.add(candidate.trim().split(/\s+/)[0]);
 }
@@ -61,9 +61,15 @@ for (const char of css.replace(/\/\*[\s\S]*?\*\//g, '')) {
 assert.equal(braces, 0, 'Unbalanced CSS rules');
 const variables = new Set([...css.matchAll(/(--[\w-]+)\s*:/g)].map(match => match[1]));
 for (const [, variable] of css.matchAll(/var\((--[\w-]+)/g)) assert.ok(variables.has(variable), `Missing token ${variable}`);
-for (const path of ['main.js','components/journey-scene.js','execution/serve.mjs']) {
+for (const path of ['main.js','components/journey-scene.js','components/BrainScrollExperience.js','execution/serve.mjs']) {
     const result = spawnSync(process.execPath, ['--check', resolve(root, path)], { encoding: 'utf8' });
     assert.equal(result.status, 0, result.stderr);
+}
+for (const tier of ['intro-desktop', 'intro-mobile']) {
+    for (let i = 1; i <= 287; i++) {
+        const padded = String(i).padStart(3, '0');
+        await access(resolve(root, `Imagens/optimized/${tier}/frame-${padded}.webp`));
+    }
 }
 
 function luminance(hex) {

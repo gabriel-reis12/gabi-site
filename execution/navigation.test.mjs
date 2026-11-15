@@ -5,7 +5,7 @@ import { runInNewContext } from 'node:vm';
 
 // Exercise the shipped controller without adding a DOM dependency to this static site.
 // Browser layout, native keyboard behavior and assistive technology still need visual QA.
-const source = (await readFile(new URL('../main.js', import.meta.url), 'utf8')).replace(/^import[^\n]+\n/, '');
+const source = (await readFile(new URL('../main.js', import.meta.url), 'utf8')).replace(/^import[^\n]+\r?\n/gm, '');
 function fixture(isMobile = true) {
     const events = () => {
         const listeners = new Map();
@@ -26,7 +26,7 @@ function fixture(isMobile = true) {
     document.getElementById = id => id === 'sobre' ? target : null;
     const mobile = { ...events(), matches: isMobile };
     const reduced = { ...events(), matches: true };
-    runInNewContext(source, { document, window: { matchMedia: query => query.includes('960') ? mobile : reduced }, mountJourneyScene() {} });
+    runInNewContext(source, { document, window: { matchMedia: query => query.includes('960') ? mobile : reduced }, mountJourneyScene() {}, createBrainScrollExperience() {} });
     return { header, toggle, nav, target, link, label, document, mobile };
 }
 

@@ -4,7 +4,7 @@
     --champagne: #d5b594; --ivory: #f1e8df; --paper: #f8f3ed; --ink: #33231c;
     --muted-dark: #c0afa1; --muted-light: #6c584b; --line-dark: #514035; --line-light: #cbbcaf;
     --font-display: 'Cormorant Garamond', Georgia, serif; --font-body: 'Manrope', 'Segoe UI', sans-serif;
-    --gutter: clamp(24px, 5.5vw, 88px); --section-space: clamp(76px, 9vw, 136px);
+    --gutter: clamp(24px, 5.5vw, 88px); --section-space: clamp(76px, 9vw, 136px); --header-offset: 100px;
 }
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 110px; background: var(--espresso); }
@@ -66,6 +66,29 @@ strong { font-weight: 600; }
 .menu-toggle[aria-expanded="true"] .menu-lines::after { content: ''; position: absolute; inset: -1px 0 0; border-top: 1px solid; transform: rotate(90deg); }
 
 /* Static media composition and future cinematic integration slot. */
+.brain-journey { position: relative; background: var(--espresso); overflow-x: clip; }
+.brain-journey-stage { position: relative; min-height: clamp(460px, 74svh, 740px); display: grid; align-items: end; overflow: hidden; background: var(--espresso); }
+.brain-journey.is-interactive .brain-journey-stage { height: calc(100svh - var(--header-offset, 100px)); min-height: 460px; }
+.brain-journey-stage::after { content: ''; position: absolute; inset: auto 0 0; height: 112px; background: linear-gradient(to bottom, transparent, var(--espresso)); pointer-events: none; z-index: 4; }
+.brain-journey-poster, .brain-journey-canvas, .brain-journey-scrim, .brain-journey-veil { position: absolute; inset: 0; width: 100%; height: 100%; }
+.brain-journey-poster { object-fit: cover; object-position: center center; transition: opacity .35s ease; z-index: 0; }
+.brain-journey-poster.is-hidden { opacity: 0; pointer-events: none; }
+.brain-journey-canvas { display: block; opacity: 0; transition: opacity .35s ease; z-index: 1; pointer-events: none; }
+.brain-journey-canvas.is-ready { opacity: 1; }
+.brain-journey-scrim { background: linear-gradient(to top, rgba(16, 12, 10, .92) 0%, rgba(16, 12, 10, .58) 38%, rgba(16, 12, 10, .14) 72%, rgba(16, 12, 10, .35) 100%); pointer-events: none; z-index: 2; }
+.brain-journey-veil { background: radial-gradient(ellipse at 80% 46%, #35241c 0%, #1b130f 36%, var(--espresso) 72%); opacity: 0; pointer-events: none; z-index: 3; }
+.brain-journey-overlay { position: relative; z-index: 5; align-self: end; display: grid; gap: 26px; padding-block: clamp(28px, 4.5vw, 52px); pointer-events: none; }
+.brain-journey-beats { position: relative; min-height: clamp(132px, 16vw, 210px); max-width: 720px; }
+.journey-beat { position: absolute; left: 0; right: 0; bottom: 0; opacity: 0; visibility: hidden; }
+.journey-beat.is-active { opacity: 1; visibility: visible; }
+.journey-beat h2 { margin-top: 16px; font-size: clamp(36px, 4.5vw, 66px); line-height: 1.04; color: var(--ivory); text-shadow: 0 2px 24px rgba(16, 12, 10, .85); }
+.brain-journey-footer { display: grid; gap: 14px; }
+.journey-progress { width: min(260px, 100%); height: 1px; background: rgba(203, 188, 175, .24); overflow: hidden; }
+.journey-progress-bar { display: block; width: 100%; height: 100%; background: var(--champagne); transform: scaleX(0); transform-origin: left center; }
+.journey-controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; }
+.journey-scroll-cue { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted-dark); }
+.journey-skip { pointer-events: auto; font-size: 12px; gap: 14px; color: var(--ivory); }
+
 .hero { position: relative; background: radial-gradient(ellipse at 80% 46%, #35241c 0%, #1b130f 36%, var(--espresso) 72%); }
 .hero-grid { display: grid; grid-template-columns: 1.12fr 1fr; gap: clamp(48px, 7vw, 112px); align-items: center; padding-top: clamp(48px, 5.5vw, 80px); padding-bottom: 64px; }
 .hero-copy { position: relative; z-index: 2; padding-bottom: 15px; min-width: 0; }
@@ -214,7 +237,7 @@ details[open] > summary .disclosure-icon::after { transform: rotate(0); }
 /* A failed script never hides content. */
 @keyframes reveal { from { opacity: .3; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 @media (prefers-reduced-motion: no-preference) { .is-revealed { animation: reveal .65s ease-out both; } }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } .brain-journey-stage { height: auto !important; min-height: clamp(380px, 58svh, 560px); } .journey-progress, .journey-scroll-cue { display: none; } }
 
 @media (max-width: 1100px) {
     .header-inner { min-height: 88px; gap: 18px; }
@@ -253,6 +276,10 @@ details[open] > summary .disclosure-icon::after { transform: rotate(0); }
 }
 @media (max-width: 760px) {
     :root { --gutter: 25px; --section-space: 76px; }
+    .brain-journey-stage { min-height: clamp(440px, 76svh, 660px); }
+    .brain-journey-poster { object-fit: contain; object-position: center 38%; }
+    .brain-journey-beats { min-height: 152px; }
+    .journey-beat h2 { font-size: clamp(32px, 8.2vw, 46px); }
     .hero-grid { grid-template-columns: 1fr; gap: 42px; padding-top: 44px; padding-bottom: 40px; }
     .hero-copy { padding-bottom: 0; }
     .hero-copy .eyebrow { max-width: none; font-size: 10px; gap: 12px; }
@@ -321,7 +348,8 @@ details[open] > summary .disclosure-icon::after { transform: rotate(0); }
 }
 @media print {
     .site-header { position: static; }
-    .menu-toggle, .hero-bottom, .skip-link { display: none !important; }
+    .menu-toggle, .hero-bottom, .skip-link, .brain-journey-canvas, .journey-progress, .journey-scroll-cue { display: none !important; }
+    .brain-journey-stage { height: auto !important; min-height: 300px; }
     .section { padding-block: 30px; }
     .background .section-intro { position: static; }
     [data-reveal] { animation: none; }

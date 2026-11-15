@@ -1,4 +1,5 @@
 import { mountJourneyScene } from './components/journey-scene.js';
+import { createBrainScrollExperience } from './components/BrainScrollExperience.js';
 
 const header = document.querySelector('.site-header');
 const toggle = document.querySelector('.menu-toggle');
@@ -73,5 +74,6 @@ if ('IntersectionObserver' in window && !reducedMotion.matches) {
     });
 }
 
-// Supply a loader only when the real cinematic assets are ready.
+// Stage 02: GSAP ScrollTrigger + Canvas 2D cinematic sequence ("The Inner Journey").
+createBrainScrollExperience(document.querySelector('[data-brain-journey]'));
 mountJourneyScene(document.querySelector('[data-journey-scene]'));

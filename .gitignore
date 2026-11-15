@@ -1,6 +1,7 @@
 # Pastas ignoradas
 .tmp/
 __pycache__/
+Imagens/Imagens Intro/
 
 # Variáveis de ambiente
 .env

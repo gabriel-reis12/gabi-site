@@ -4,13 +4,13 @@ import { fileURLToPath } from 'node:url';
 import { dirname, resolve, extname, sep } from 'node:path';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.woff2': 'font/woff2' };
+const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp', '.woff2': 'font/woff2' };
 const server = createServer(async (req, res) => {
     try {
         const pathname = decodeURIComponent(new URL(req.url, 'http://127.0.0.1').pathname);
         const relative = pathname === '/' ? 'index.html' : pathname.slice(1);
         // Preview only public site files; never serve the checkout's private state.
-        const allowed = ['index.html', 'styles.css', 'main.js'].includes(relative) || /^(Imagens\/|components\/|fonts\/)/.test(relative);
+        const allowed = ['index.html', 'styles.css', 'main.js'].includes(relative) || /^(Imagens\/|components\/|fonts\/|vendor\/)/.test(relative);
         const target = resolve(root, relative);
         if (!allowed || !target.startsWith(root + sep) || relative.split('/').some(part => part.startsWith('.'))) {
             res.writeHead(404).end('Not found');
