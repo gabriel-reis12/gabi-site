@@ -3,561 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#100C0A">
     <title>Dra. Gabriela Sarra | Psicóloga Clínica</title>
     <meta name="description" content="Psicóloga clínica focada em neurodesenvolvimento (ABA) e intervenções para TEA. Atendimento online especializado.">
+    <meta property="og:title" content="Dra. Gabriela Sarra | Psicóloga Clínica">
+    <meta property="og:description" content="Psicologia com rigor técnico e olhar humano. Conheça Gabriela Sarra e seu atendimento clínico online.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="main.js" type="module"></script>
 </head>
 <body>
-    <!-- Particle Canvas -->
-    <canvas id="particles-canvas"></canvas>
-    <!-- Light Rays overlay -->
-    <div class="light-rays" aria-hidden="true"></div>
-
-    <!-- Navbar -->
-    <!-- Mobile Nav Overlay -->
-    <div class="mobile-nav-overlay" id="mobile-nav-overlay">
-        <ul>
-            <li><a href="#sobre" class="mobile-nav-link">Sobre</a></li>
-            <li><a href="#formacao" class="mobile-nav-link">Formação</a></li>
-            <li><a href="#experiencia" class="mobile-nav-link">Experiência</a></li>
-            <li><a href="#depoimentos" class="mobile-nav-link">Depoimentos</a></li>
-        </ul>
-        <a href="https://wa.me/5519993730000" class="btn btn-primary mobile-nav-link" target="_blank">
-            <i class="fa-brands fa-whatsapp"></i> Agendar Sessão
-        </a>
-    </div>
-
-    <nav class="navbar hidden">
-        <div class="container nav-container">
-            <div class="logo">
-                <img src="Imagens/Logo.png" alt="Dra. Gabriela Sarra" style="height: 140px; display: block; padding: 10px 0;">
-            </div>
-            <ul class="nav-links">
-                <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#formacao">Formação</a></li>
-                <li><a href="#experiencia">Experiência</a></li>
-                <li><a href="#depoimentos">Depoimentos</a></li>
-            </ul>
-            <a href="https://wa.me/5519993730000" class="btn btn-outline" target="_blank">Agendar Sessão</a>
-            <button class="hamburger-btn" id="hamburger-btn" aria-label="Abrir menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <header class="hero" id="inicio">
-        <!-- Spotlight / Radial Gradient Background -->
-        <div class="hero-spotlight"></div>
-        <div class="glow-orb orb-1"></div>
-        <div class="glow-orb orb-2"></div>
-        
-        <div class="container hero-container-v2">
-            <div class="hero-header-block hidden delay-1">
-                <div class="status-badge" style="margin-bottom: 2rem;">
-                    <span class="status-dot"></span>
-                    <span>Atendimento Clínico Especializado</span>
-                </div>
-                <h1>Construindo <span>conquistas</span> diárias no seu <span class="highlight text-accent">desenvolvimento</span></h1>
-                <p>Sou psicóloga com foco em neurodesenvolvimento e intervenções clínicas, dedicada a promover qualidade de vida para crianças, adolescentes e suas famílias. Acredito em uma psicologia que une o rigor técnico ao olhar humano.</p>
-                
-                <div class="hero-actions-v2">
-                    <div class="btn-outer-wrapper">
-                        <a href="https://wa.me/5519993730000" class="btn btn-primary btn-shadcn" target="_blank">
-                            <i class="fa-brands fa-whatsapp"></i> Agendar Sessão
-                        </a>
-                    </div>
-                    <a href="#sobre" class="btn btn-ghost">Conhecer a abordagem</a>
-                </div>
-            </div>
-            
-            <div class="hero-visual-frame hidden delay-2">
-                <div class="fade-bottom"></div>
-                <div class="frame-container glass-panel">
-                    <img src="Imagens/Foto 1.jpeg" alt="Dra. Gabriela Sarra" class="framed-image">
-                </div>
-            </div>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="#inicio" aria-label="Gabriela Sarra — início"><span class="brand-name">Gabriela Sarra<span class="brand-dot">.</span></span><span class="brand-description">Psicóloga clínica · CRP 06/215390</span></a>
+            <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav" hidden><span class="menu-label">Menu</span><span class="menu-lines" aria-hidden="true"></span></button>
+            <nav id="site-nav" class="site-nav" aria-label="Navegação principal">
+                <a href="#sobre">Sobre mim</a><a href="#abordagem">Abordagem</a><a href="#atendimento">Atendimento</a><a href="#duvidas">Dúvidas</a>
+                <a class="button button-outline nav-cta" href="https://wa.me/5519993730000" target="_blank" rel="noopener noreferrer">Agendar sessão <span aria-hidden="true">↗</span><span class="sr-only"> pelo WhatsApp (abre em nova aba)</span></a>
+            </nav>
         </div>
     </header>
-
-    <!-- About Section -->
-    <section class="about section" id="sobre">
-        <div class="glow-orb orb-4"></div>
-        <img src="Imagens/brain.jpg" alt="Neurodesenvolvimento" style="position: absolute; right: 0; top: 10%; opacity: 0.15; width: 600px; max-width: 100%; mix-blend-mode: screen; z-index: -1; pointer-events: none; border-radius: 50%;">
-        <div class="container about-container">
-            <div class="about-visual hidden">
-                <div class="image-wrapper" style="position: relative;">
-                    <img src="Imagens/02.png" alt="Atendimento Psicológico em Sessão" style="width: 100%; border-radius: 16px; object-fit: cover; aspect-ratio: 1/1; display: block; box-shadow: 0 10px 40px rgba(0,0,0,0.5);">
-                    <img src="Imagens/03.png" alt="Ilustração Terapêutica" style="position: absolute; bottom: -30px; right: -30px; width: 220px; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); border: 1px solid var(--color-border); z-index: 2;" class="glass-panel">
+    <main id="conteudo" tabindex="-1">
+        <section class="hero" id="inicio" aria-labelledby="hero-title">
+            <div class="container hero-grid">
+                <div class="hero-copy">
+                    <p class="eyebrow"><span class="small-rule" aria-hidden="true"></span> Um espaço para o seu desenvolvimento</p>
+                    <h1 id="hero-title">Cada jornada<br>merece um<br><em>olhar humano.</em></h1>
+                    <p class="hero-description">Psicologia com escuta, sensibilidade e rigor técnico. Um cuidado dedicado ao desenvolvimento de crianças, adolescentes e suas famílias.</p>
+                    <div class="hero-actions"><a class="button button-primary" href="https://wa.me/5519993730000" target="_blank" rel="noopener noreferrer">Agendar uma conversa <span aria-hidden="true">↗</span><span class="sr-only"> pelo WhatsApp (abre em nova aba)</span></a><a class="text-link" href="#sobre">Conheça meu trabalho <span aria-hidden="true">↓</span></a></div>
+                    <p class="availability"><span aria-hidden="true"></span> Atendimento exclusivamente online</p>
+                </div>
+                <div class="journey-scene" data-journey-scene>
+                    <div class="journey-fallback" data-journey-fallback>
+                        <div class="portrait-outline" aria-hidden="true"></div>
+                        <figure class="hero-portrait">
+                            <img src="Imagens/optimized/02-960.jpg" srcset="Imagens/optimized/02-480.jpg 480w, Imagens/optimized/02-960.jpg 960w" sizes="(max-width: 760px) 90vw, 43vw" width="960" height="1286" alt="Gabriela Sarra sentada em uma poltrona, sorrindo" fetchpriority="high">
+                            <figcaption><span>Dra. Gabriela Sarra</span><span>Psicóloga clínica · CRP 06/215390</span></figcaption>
+                        </figure>
+                        <span class="portrait-note" aria-hidden="true">Escuta que acolhe. Cuidado que acompanha.</span>
+                    </div>
+                    <div class="journey-mount" data-journey-mount aria-hidden="true" hidden></div>
                 </div>
             </div>
-            <div class="about-content hidden delay-2">
-                <h2 class="section-title">Sobre Mim</h2>
-                <div class="divider"></div>
-                <p>Sou psicóloga com foco em neurodesenvolvimento e intervenções clínicas, dedicada a promover qualidade de vida para crianças, adolescentes e suas famílias.</p>
-                <p>Minha trajetória é marcada pela atuação especializada no <strong>Transtorno do Espectro Autista (TEA)</strong> e outras comorbidades, utilizando como abordagem a <strong>Análise do Comportamento (ABA)</strong>.</p>
-                <p>Acredito em uma psicologia que une o rigor técnico ao olhar humano, focando no fortalecimento de vínculos e na autonomia de cada indivíduo que acompanho.</p>
-                
-                <div class="about-features">
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fa-solid fa-laptop-medical"></i></div>
-                        <div>
-                            <h4>Atendimento Exclusivo Online</h4>
-                            <p>Terapia de alta qualidade através de vídeo-chamadas. Segurança e conforto para você e sua família, de onde estiverem.</p>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fa-solid fa-people-arrows"></i></div>
-                        <div>
-                            <h4>Suporte Integral Personalizado</h4>
-                            <p>Manejo clínico direto aliado à orientação parental constante e articulação direta com equipes escolares.</p>
-                        </div>
-                    </div>
+            <div class="container hero-bottom"><span>Neurodesenvolvimento <span aria-hidden="true">/</span> Vínculos <span aria-hidden="true">/</span> Autonomia</span><a href="#sobre">Uma jornada de cuidado <span class="round-arrow" aria-hidden="true">↓</span></a></div>
+        </section>
+        <section class="section section-light about" id="sobre" aria-labelledby="about-title">
+            <div class="container about-grid">
+                <figure class="about-photo" data-reveal><img src="Imagens/optimized/03-960.jpg" srcset="Imagens/optimized/03-480.jpg 480w, Imagens/optimized/03-960.jpg 960w" sizes="(max-width: 760px) 90vw, 38vw" width="960" height="1286" alt="Gabriela Sarra em sua mesa de trabalho" loading="lazy" decoding="async"><figcaption>Presença, escuta e respeito à sua história.</figcaption></figure>
+                <div class="about-copy" data-reveal>
+                    <p class="eyebrow">01 <span aria-hidden="true">/</span> A pessoa por trás do cuidado</p>
+                    <h2 id="about-title">Olá, sou<br><em>Gabriela Sarra.</em></h2>
+                    <p class="intro-text">Acredito em uma psicologia que une o rigor técnico ao olhar humano.</p>
+                    <p>Sou psicóloga com foco em neurodesenvolvimento e intervenções clínicas, dedicada a promover qualidade de vida para crianças, adolescentes e suas famílias.</p>
+                    <p>Minha trajetória é marcada pela atuação especializada no <strong>Transtorno do Espectro Autista (TEA)</strong> e outras comorbidades, utilizando como abordagem a <strong>Análise do Comportamento (ABA)</strong>.</p>
+                    <p>Meu trabalho tem como foco o fortalecimento de vínculos e a autonomia de cada indivíduo que acompanho.</p>
+                    <div class="about-signoff"><span class="signature">Gabriela Sarra</span><span>Psicóloga clínica<br>CRP 06/215390</span></div>
+                    <a class="text-link" href="#formacao">Conheça minha trajetória <span aria-hidden="true">↗</span></a>
                 </div>
             </div>
+        </section>
+        <section class="section philosophy" id="abordagem" aria-labelledby="approach-title">
+            <div class="container">
+                <div class="section-topline"><p class="eyebrow">02 <span aria-hidden="true">/</span> Meu olhar para a psicologia</p><span class="section-index" aria-hidden="true">GS</span></div>
+                <div class="philosophy-grid" data-reveal><h2 id="approach-title">Conhecimento para orientar.<br><em>Sensibilidade para acolher.</em></h2><div><p>O cuidado vai além da sessão. Envolve compreender cada história e acompanhar as relações que fazem parte dela.</p><p>Minha atuação na Análise do Comportamento (ABA) reúne manejo clínico direto, orientação parental e articulação com equipes escolares.</p><a class="text-link" href="#atendimento">Como posso acompanhar você <span aria-hidden="true">↓</span></a></div></div>
+                <div class="principles" data-reveal><div><span class="principle-number">I.</span><h3>Escuta</h3><p>Um olhar humano para cada indivíduo e sua história.</p></div><div><span class="principle-number">II.</span><h3>Vínculo</h3><p>O cuidado construído junto à família e à rede de apoio.</p></div><div><span class="principle-number">III.</span><h3>Autonomia</h3><p>Atenção ao desenvolvimento e às conquistas do cotidiano.</p></div></div>
+            </div>
+        </section>
+        <section class="section section-light care" id="atendimento" aria-labelledby="care-title">
+            <div class="container care-grid">
+                <div class="section-intro" data-reveal><p class="eyebrow">03 <span aria-hidden="true">/</span> Áreas de atendimento</p><h2 id="care-title">Cuidado em cada<br><em>parte da jornada.</em></h2><p>Atendimento clínico online para crianças, adolescentes e suas famílias, com suporte integral personalizado.</p><a class="text-link" href="https://wa.me/5519993730000" target="_blank" rel="noopener noreferrer">Conversar sobre o atendimento <span aria-hidden="true">↗</span><span class="sr-only"> pelo WhatsApp (abre em nova aba)</span></a></div>
+                <div class="care-list">
+                    <article data-reveal><span class="row-number">01</span><div><h3>Neurodesenvolvimento e TEA</h3><p>Intervenções clínicas voltadas ao Transtorno do Espectro Autista e outras comorbidades, com a abordagem da Análise do Comportamento (ABA).</p></div></article>
+                    <article data-reveal><span class="row-number">02</span><div><h3>Acompanhamento psicológico</h3><p>Atendimentos psicoterapêuticos com foco clínico, dedicados ao bem-estar, à saúde mental e ao fortalecimento de vínculos.</p></div></article>
+                    <article data-reveal><span class="row-number">03</span><div><h3>Orientação parental</h3><p>Orientação às famílias integrada ao manejo clínico, acompanhando o cuidado no dia a dia.</p></div></article>
+                    <article data-reveal><span class="row-number">04</span><div><h3>Articulação com a escola</h3><p>Contato direto com equipes escolares como parte de um suporte integral e personalizado.</p></div></article>
+                </div>
+            </div>
+            <div class="container gentle-note" id="nao-normal"><span aria-hidden="true">✳</span><p>Há espaço para falar sobre o que você sente.<br><strong>Suas dificuldades merecem escuta e cuidado.</strong></p></div>
+        </section>
+        <section class="section process" id="processo" aria-labelledby="process-title">
+            <div class="container">
+                <div class="section-heading" data-reveal><p class="eyebrow">04 <span aria-hidden="true">/</span> Como funciona</p><h2 id="process-title">O primeiro passo pode ser<br><em>uma conversa.</em></h2><p>Um encontro online. Um espaço de escuta. Um cuidado que considera você e sua família.</p></div>
+                <ol class="process-steps">
+                    <li data-reveal><span class="step-number" aria-hidden="true">01</span><h3>Entre em contato</h3><p>Fale comigo pelo WhatsApp para conversar sobre o atendimento e agendar sua sessão.</p><a class="text-link" href="https://wa.me/5519993730000" target="_blank" rel="noopener noreferrer">Vamos conversar <span aria-hidden="true">↗</span><span class="sr-only"> pelo WhatsApp (abre em nova aba)</span></a></li>
+                    <li data-reveal><span class="step-number" aria-hidden="true">02</span><h3>Encontre seu espaço</h3><p>As sessões acontecem por videochamada, em tempo real, com duração de 50 minutos. Sem sair de casa.</p><span class="step-detail">Online · 50 minutos</span></li>
+                    <li data-reveal><span class="step-number" aria-hidden="true">03</span><h3>Construa seu caminho</h3><p>O acompanhamento reúne escuta e suporte personalizado, com foco nos vínculos e na autonomia.</p><span class="step-detail">Cuidado · Desenvolvimento</span></li>
+                </ol>
+            </div>
+        </section>
+        <section class="section section-light background" aria-labelledby="background-title">
+            <div class="container background-grid">
+                <div class="section-intro" data-reveal><p class="eyebrow">05 <span aria-hidden="true">/</span> Trajetória profissional</p><h2 id="background-title">Uma prática que<br>se constrói com<br><em>conhecimento.</em></h2><p>Formação acadêmica e experiência clínica a serviço de um cuidado atento.</p><div class="credential">CRP <strong>06/215390</strong><span>Gabriela Sarra · Psicóloga</span></div></div>
+                <div class="background-records">
+                    <section id="formacao" aria-labelledby="formacao-title"><h3 class="records-title" id="formacao-title">Formação acadêmica <span>01—04</span></h3>
+<details class="record" open><summary><span><span class="record-date">Fev 2020 – Dez 2021</span><span class="record-title">Psicologia (Ingresso Inicial)</span><span class="record-institution">PUC Campinas</span></span><span class="disclosure-icon" aria-hidden="true"></span></summary><div class="record-body"><p>Pontifícia Universidade Católica de Campinas.</p><span>Graduação</span></div></details>
+<details class="record"><summary><span><span class="record-date">Fev 2022 – Dez 2024</span><span class="record-title">Bacharelado em Psicologia</span><span class="record-institution">UNISAL</span></span><span class="disclosure-icon" aria-hidden="true"></span></summary><div class="record-body"><p>Centro Universitário Salesiano de São Paulo.</p><span>Bacharelado</span></div></details>
+<details class="record"><summary><span><span class="record-date">Fev 2025 – Fev 2026</span><span class="record-title">Especialização em Neuropsicologia</span><span class="record-institution">Universidade Anhembi Morumbi (UAM)</span></span><span class="disclosure-icon" aria-hidden="true"></span></summary><div class="record-body"><p>Pós-graduação Lato Sensu — Intervenções psicológicas e saúde comportamental.</p><span>Pós-graduação</span></div></details>
+<details class="record"><summary><span><span class="record-date">Ago 2025 – Fev 2026</span><span class="record-title">Especialização em ABA</span><span class="record-institution">Faculdade Líbano</span></span><span class="disclosure-icon" aria-hidden="true"></span></summary><div class="record-body"><p>Pós-graduação Lato Sensu — Análise do comportamento aplicada.</p><span>Pós-graduação</span></div></details>
+</section>
+<section id="experiencia" aria-labelledby="experiencia-title"><h3 class="records-title" id="experiencia-title">Experiência profissional <span>01—05</span></h3>
+<details class="record"><summary><span><span class="record-date">Out 2023 – Fev 2025</span><span class="record-title">Acompanhante Terapêutica</span><span class="record-institution">PHS Samaritano Saúde</span></span><span class="disclosure-icon" aria-hidden="true"></span></summary><div class="record-body"><p>Atuação com análise de comportamento aplicada e intervenções psicológicas.</p><span>Clínico</span></div></details>
+<details class="record"><summary><span><span class="record-date">Fev 2024 – Dez 2024</span><span class="record-title">Estagiária de Psicologia</span><span class="record-institution">Obra Social Casa de Dom Bosco</span></span><span class="disclosure-icon" aria-hidden="true"></span></summary><div class="record-body"><p>Intervenção psicossocial com adolescentes do Serviço de Convivência e Fortalecimento de Vínculos com o objetivo de fortalecer o sujeito frente à sua história.</p><span>Social</span></div></details>
+<details class="record"><summary><span><span class="record-date">Mar 2025 – Dez 2025</span><span class="record-title">Psicóloga Clínica</span><span class="record-institution">Clínica de Asas</span></span><span class="disclosure-icon" aria-hidden="true"></span></summary><div class="record-body"><p>Atendimento clínico baseado na abordagem Analítico-Comportamental, direcionado ao público infantil e adolescente.</p><span>Clínico</span></div></details>
+<details class="record"><summary><span><span class="record-date">Mar 2025 – O momento</span><span class="record-title">Psicóloga</span><span class="record-institution">PHS Samaritano Saúde</span></span><span class="disclosure-icon" aria-hidden="true"></span></summary><div class="record-body"><p>Atuação com análise de comportamento aplicada integrando equipes médicas e clínicas.</p><span>Atual</span></div></details>
+<details class="record"><summary><span><span class="record-date">Ago 2025 – O momento</span><span class="record-title">Psicóloga Autônoma</span><span class="record-institution">Clínica Particular</span></span><span class="disclosure-icon" aria-hidden="true"></span></summary><div class="record-body"><p>Atendimentos psicoterapêuticos para promover bem-estar e saúde mental, com foco clínico.</p><span>Atual</span></div></details>
+</section>
+                </div>
+            </div>
+        </section>
+        <section class="section section-light faq" id="duvidas" aria-labelledby="faq-title">
+            <span class="anchor-alias" id="depoimentos" aria-hidden="true"></span>
+            <div class="container faq-grid">
+                <div class="section-intro" data-reveal><p class="eyebrow">06 <span aria-hidden="true">/</span> Perguntas frequentes</p><h2 id="faq-title">Para começar<br><em>com tranquilidade.</em></h2><p>Algumas informações para ajudar você a conhecer o atendimento.</p></div>
+                <div class="faq-list">
+                    <details><summary>O atendimento é online ou presencial?<span class="disclosure-icon" aria-hidden="true"></span></summary><div class="faq-answer"><p>O atendimento é exclusivamente online, por videochamada em tempo real. Você pode participar de um espaço confortável, sem sair de casa.</p></div></details>
+                    <details><summary>Quanto tempo dura cada sessão?<span class="disclosure-icon" aria-hidden="true"></span></summary><div class="faq-answer"><p>As sessões têm duração de 50 minutos.</p></div></details>
+                    <details><summary>Qual é a sua abordagem profissional?<span class="disclosure-icon" aria-hidden="true"></span></summary><div class="faq-answer"><p>Minha abordagem é a Análise do Comportamento (ABA), com foco em neurodesenvolvimento e intervenções clínicas para TEA e outras comorbidades.</p></div></details>
+                    <details><summary>A família participa do acompanhamento?<span class="disclosure-icon" aria-hidden="true"></span></summary><div class="faq-answer"><p>A orientação parental faz parte do suporte integral personalizado, junto ao manejo clínico e à articulação com equipes escolares.</p></div></details>
+                    <details><summary>Como posso agendar uma sessão?<span class="disclosure-icon" aria-hidden="true"></span></summary><div class="faq-answer"><p>O agendamento é feito pelo WhatsApp. <a href="https://wa.me/5519993730000" target="_blank" rel="noopener noreferrer">Entre em contato pelo número +55 19 99373-0000<span class="sr-only"> (abre em nova aba)</span></a> para conversar sobre o atendimento.</p></div></details>
+                </div>
+            </div>
+        </section>
+        <section class="section invitation" id="agendar" aria-labelledby="contact-title">
+            <div class="container invitation-inner" data-reveal><p class="eyebrow">Cada história merece ser escutada</p><h2 id="contact-title">Vamos dar o<br><em>primeiro passo?</em></h2><p>Agende uma conversa online e vamos construir, passo a passo, caminhos para fortalecer sua família.</p><a class="button button-primary" href="https://wa.me/5519993730000" target="_blank" rel="noopener noreferrer">Falar pelo WhatsApp <span aria-hidden="true">↗</span><span class="sr-only"> (abre em nova aba)</span></a><span class="invitation-note">Atendimento online · Escuta e acolhimento</span></div>
+        </section>
+    </main>
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand"><img src="Imagens/Logo.png" alt="Logo Gabriela Sarra, psicóloga, CRP 06/215390" width="1024" height="576" loading="lazy" decoding="async"><p>Psicologia com rigor técnico<br>e olhar humano.</p></div>
+            <div><h2>Explore</h2><a href="#sobre">Sobre mim</a><a href="#formacao">Formação acadêmica</a><a href="#experiencia">Experiência profissional</a><a href="#duvidas">Perguntas frequentes</a></div>
+            <div class="footer-contact"><h2>Vamos conversar</h2><a href="https://wa.me/5519993730000" target="_blank" rel="noopener noreferrer">+55 19 99373-0000 <span aria-hidden="true">↗</span><span class="sr-only"> WhatsApp (abre em nova aba)</span></a><a href="mailto:gabysarra23@gmail.com">gabysarra23@gmail.com</a><p>Atendimento exclusivamente online<br>CRP 06/215390</p></div>
         </div>
-    </section>
-
-    <!-- ── CTA "Agende sua Sessão" ─────────────────────────────────────────── -->
-    <section class="cta-schedule section" id="agendar">
-        <div class="container">
-            <div class="cta-schedule-inner hidden">
-                <div class="cta-top">
-                    <h2 class="cta-headline">Agende <span class="text-accent">sua sessão.</span></h2>
-                    <a href="https://wa.me/5519993730000" target="_blank" rel="noopener" class="btn btn-primary">
-                        <i class="fa-brands fa-whatsapp"></i> Falar pelo WhatsApp
-                    </a>
-                </div>
-
-                <div class="cta-benefits">
-                    <div class="cta-benefit-item">
-                        <div class="cta-benefit-icon"><i class="fa-regular fa-clock"></i></div>
-                        <span>50 Minutos</span>
-                    </div>
-                    <div class="cta-benefit-item">
-                        <div class="cta-benefit-icon"><i class="fa-solid fa-video"></i></div>
-                        <span>Vídeo em Tempo Real</span>
-                    </div>
-                    <div class="cta-benefit-item">
-                        <div class="cta-benefit-icon"><i class="fa-solid fa-lock"></i></div>
-                        <span>Sigilo Absoluto</span>
-                    </div>
-                    <div class="cta-benefit-item">
-                        <div class="cta-benefit-icon"><i class="fa-solid fa-shield-heart"></i></div>
-                        <span>Ambiente Seguro e Livre de Julgamento</span>
-                    </div>
-                    <div class="cta-benefit-item">
-                        <div class="cta-benefit-icon"><i class="fa-solid fa-house-chimney"></i></div>
-                        <span>Sem sair de casa, com conforto e praticidade</span>
-                    </div>
-                </div>
-
-                <p class="cta-phrase">O seu futuro começa com a decisão que você toma hoje. Não decidir também é uma decisão — seja sua prioridade e cuide de você.</p>
-            </div>
-        </div>
-    </section>
-    <!-- ── Não é Normal / Não é Saudável ─────────────────────────────────── -->
-    <section class="nao-normal section" id="nao-normal">
-        <div class="container">
-            <div class="nao-normal-inner hidden">
-
-                <!-- Left: Brain visual -->
-                <div class="nao-normal-visual">
-                    <img src="Imagens/brain.jpg" alt="Ilustração de Neurodesenvolvimento" class="nao-normal-brain">
-                    <div class="nao-normal-brain-glow"></div>
-                </div>
-
-                <!-- Right: List -->
-                <div class="nao-normal-content">
-                    <h2 class="nao-normal-title">
-                        Não é normal e<br>
-                        <span class="text-accent">não é saudável</span>
-                    </h2>
-
-                    <ul class="symptom-list" id="symptom-list">
-                        <li class="symptom-item" data-message="A ansiedade constante rouba o momento presente e aprisiona nossa mente em medos sobre o futuro. Vamos aprender a ancorar-se no agora e regular a hiperativação emocional."><span class="symptom-dot"></span>Estar ansioso o tempo todo</li>
-                        <li class="symptom-item" data-message="A irritabilidade frequente muitas vezes é um grito de socorro interno contra a sobrecarga, exaustão ou limites que estão sendo desrespeitados constantemente."><span class="symptom-dot"></span>Estar irritado o tempo todo</li>
-                        <li class="symptom-item" data-message="Viver em função da aprovação alheia afasta você da sua própria essência. Construir o autoconhecimento devolve a segurança necessária para ser você mesmo(a)."><span class="symptom-dot"></span>Se preocupar com a opinião alheia o tempo todo</li>
-                        <li class="symptom-item" data-message="A tristeza prolongada afeta sua percepção de mundo e energia vital. O acompanhamento é fundamental para acolher esse estado e promover a ativação comportamental."><span class="symptom-dot"></span>Estar triste o tempo todo</li>
-                        <li class="symptom-item" data-message="Quando o cansaço não passa com uma noite de sono, pode ser um sinal clínico de esgotamento emocional. Seu corpo e sua mente precisam de regulação profunda."><span class="symptom-dot"></span>Sensação de cansaço o tempo todo</li>
-                        <li class="symptom-item" data-message="A sensação de que a vida é uma batalha cria um estado rígido de alerta e tensão. Existem recursos que ajudam no desenvolvimento de aceitação e paz interior."><span class="symptom-dot"></span>Estar em luta o tempo todo</li>
-                        <!-- Item ativo por padrão (como na screenshot) -->
-                        <li class="symptom-item active" data-message="Tais sintomas não é você — são apenas um estado que você pode aprender a controlar e equilibrar."><span class="symptom-dot"></span>Querer agradar a todos o tempo todo</li>
-                        <li class="symptom-item" data-message="O perfeccionismo crônico gera insatisfação paralisante. É vital acolher as próprias vulnerabilidades com mais autocompaixão e flexibilidade diante da vida."><span class="symptom-dot"></span>Se cobrar demais</li>
-                    </ul>
-
-                    <div class="symptom-msg-box" id="symptom-msg-box">
-                        <p class="nao-normal-note symptom-dynamic-text" id="symptom-dynamic-text">Tais sintomas não é você — são apenas um estado que você pode aprender a controlar e equilibrar.</p>
-                        <p class="nao-normal-note" style="margin-top:12px;">Não acumule suas dificuldades e tensões do dia-a-dia. <strong>Cuide da sua saúde mental.</strong></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Academic Formation Section -->
-    <section class="academic section" id="formacao">
-        <div class="container">
-            <div class="slider-two-col hidden">
-                <!-- Left: Slider -->
-                <div class="slider-col">
-                    <div class="slider-section">
-                        <div class="slider-header">
-                            <div>
-                                <h2 class="section-title">Formação<br>Acadêmica</h2>
-                                <div class="slider-line"></div>
-                            </div>
-                            <div class="slider-nav">
-                                <button class="slider-btn" id="form-prev" aria-label="Anterior">
-                                    <i class="fa-solid fa-arrow-left"></i>
-                                </button>
-                                <span class="slider-counter" id="form-counter">01 / 04</span>
-                                <button class="slider-btn" id="form-next" aria-label="Próximo">
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="slider-track" id="form-track">
-                            <div class="slide-card glass-panel active">
-                                <span class="slide-date"><i class="fa-regular fa-calendar"></i> Fev 2020 – Dez 2021</span>
-                                <h3 class="slide-title">Psicologia (Ingresso Inicial)</h3>
-                                <h4 class="slide-inst">PUC Campinas</h4>
-                                <p class="slide-desc">Pontifícia Universidade Católica de Campinas.</p>
-                                <span class="slide-tag">Graduação</span>
-                            </div>
-                            <div class="slide-card glass-panel">
-                                <span class="slide-date"><i class="fa-regular fa-calendar"></i> Fev 2022 – Dez 2024</span>
-                                <h3 class="slide-title">Bacharelado em Psicologia</h3>
-                                <h4 class="slide-inst">UNISAL</h4>
-                                <p class="slide-desc">Centro Universitário Salesiano de São Paulo.</p>
-                                <span class="slide-tag">Bacharelado</span>
-                            </div>
-                            <div class="slide-card glass-panel">
-                                <span class="slide-date"><i class="fa-regular fa-calendar"></i> Fev 2025 – Fev 2026</span>
-                                <h3 class="slide-title">Especialização em Neuropsicologia</h3>
-                                <h4 class="slide-inst">Universidade Anhembi Morumbi (UAM)</h4>
-                                <p class="slide-desc">Pós-graduação Lato Sensu — Intervenções psicológicas e saúde comportamental.</p>
-                                <span class="slide-tag">Pós-graduação</span>
-                            </div>
-                            <div class="slide-card glass-panel">
-                                <span class="slide-date"><i class="fa-regular fa-calendar"></i> Ago 2025 – Fev 2026</span>
-                                <h3 class="slide-title">Especialização em ABA</h3>
-                                <h4 class="slide-inst">Faculdade Líbano</h4>
-                                <p class="slide-desc">Pós-graduação Lato Sensu — Análise do comportamento aplicada.</p>
-                                <span class="slide-tag">Pós-graduação</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Right: Image -->
-                <div class="slider-img-col">
-                    <div class="slider-img-frame">
-                        <img src="Imagens/03.png" alt="Formação Acadêmica Gabriela Sarra" class="slider-side-img">
-                        <div class="slider-img-glow"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experiência Profissional Section -->
-    <section class="experience section" id="experiencia">
-        <div class="container">
-            <div class="slider-two-col slider-two-col--reversed hidden">
-                <!-- Left: Image -->
-                <div class="slider-img-col">
-                    <div class="slider-img-frame">
-                        <img src="Imagens/02.png" alt="Experiência Profissional Gabriela Sarra" class="slider-side-img">
-                        <div class="slider-img-glow"></div>
-                    </div>
-                </div>
-                <!-- Right: Slider -->
-                <div class="slider-col">
-                    <div class="slider-section">
-                        <div class="slider-header">
-                            <div>
-                                <h2 class="section-title">Experiência<br>Profissional</h2>
-                                <div class="slider-line"></div>
-                            </div>
-                            <div class="slider-nav">
-                                <button class="slider-btn" id="exp-prev" aria-label="Anterior">
-                                    <i class="fa-solid fa-arrow-left"></i>
-                                </button>
-                                <span class="slider-counter" id="exp-counter">01 / 05</span>
-                                <button class="slider-btn" id="exp-next" aria-label="Próximo">
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="slider-track" id="exp-track">
-                            <div class="slide-card glass-panel active">
-                                <span class="slide-date"><i class="fa-regular fa-calendar"></i> Out 2023 – Fev 2025</span>
-                                <h3 class="slide-title">Acompanhante Terapêutica</h3>
-                                <h4 class="slide-inst">PHS Samaritano Saúde</h4>
-                                <p class="slide-desc">Atuação com análise de comportamento aplicada e intervenções psicológicas.</p>
-                                <span class="slide-tag">Clínico</span>
-                            </div>
-                            <div class="slide-card glass-panel">
-                                <span class="slide-date"><i class="fa-regular fa-calendar"></i> Fev 2024 – Dez 2024</span>
-                                <h3 class="slide-title">Estagiária de Psicologia</h3>
-                                <h4 class="slide-inst">Obra Social Casa de Dom Bosco</h4>
-                                <p class="slide-desc">Intervenção psicossocial com adolescentes do Serviço de Convivência e Fortalecimento de Vínculos com o objetivo de fortalecer o sujeito frente à sua história.</p>
-                                <span class="slide-tag">Social</span>
-                            </div>
-                            <div class="slide-card glass-panel">
-                                <span class="slide-date"><i class="fa-regular fa-calendar"></i> Mar 2025 – Dez 2025</span>
-                                <h3 class="slide-title">Psicóloga Clínica</h3>
-                                <h4 class="slide-inst">Clínica de Asas</h4>
-                                <p class="slide-desc">Atendimento clínico baseado na abordagem Analítico-Comportamental, direcionado ao público infantil e adolescente.</p>
-                                <span class="slide-tag">Clínico</span>
-                            </div>
-                            <div class="slide-card glass-panel">
-                                <span class="slide-date"><i class="fa-regular fa-calendar"></i> Mar 2025 – O momento</span>
-                                <h3 class="slide-title">Psicóloga</h3>
-                                <h4 class="slide-inst">PHS Samaritano Saúde</h4>
-                                <p class="slide-desc">Atuação com análise de comportamento aplicada integrando equipes médicas e clínicas.</p>
-                                <span class="slide-tag">Atual</span>
-                            </div>
-                            <div class="slide-card glass-panel">
-                                <span class="slide-date"><i class="fa-regular fa-calendar"></i> Ago 2025 – O momento</span>
-                                <h3 class="slide-title">Psicóloga Autônoma</h3>
-                                <h4 class="slide-inst">Clínica Particular</h4>
-                                <p class="slide-desc">Atendimentos psicoterapêuticos para promover bem-estar e saúde mental, com foco clínico.</p>
-                                <span class="slide-tag">Atual</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Testimonials Section -->
-
-
-    <!-- Testimonials Section -->
-    <section class="testimonials section" id="depoimentos">
-        <div class="glow-orb orb-3"></div>
-        <div class="container">
-            <div class="section-heading hidden">
-                <h2 class="section-title text-center">Transformando Vidas</h2>
-                <p class="section-subtitle text-center">O que dizem as mães que acompanham o tratamento online</p>
-            </div>
-            
-            <div class="marquee-wrapper">
-                <div class="testimonials-marquee">
-                    <!-- Original -->
-                    <div class="testimonial-card glass-panel">
-                        <i class="fa-solid fa-quote-left quote-icon"></i>
-                        <p class="testimonial-text">"A Gabriela nos trouxe esperança e técnicas reais. Desde que iniciamos a intervenção ABA online, o desenvolvimento e a autonomia do meu filho evoluíram de uma forma que antes não achávamos possível. O olhar humano que ela tem faz toda a diferença!"</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar"><i class="fa-solid fa-user"></i></div>
-                            <div>
-                                <h4 class="author-name">Mãe 01</h4>
-                                <span class="author-role">Intervenção TEA Online</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-card glass-panel">
-                        <i class="fa-solid fa-quote-left quote-icon"></i>
-                        <p class="testimonial-text">"Como mãe, me sentia perdida diante de várias limitações e não sabia agir. A orientação parental que a Gabi nos fornece em conjunto com a articulação com a escola do meu pequeno trouxeram uma tremenda paz para a nossa casa novamente."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar"><i class="fa-solid fa-user"></i></div>
-                            <div>
-                                <h4 class="author-name">Mãe 02</h4>
-                                <span class="author-role">Orientação Parental</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card glass-panel">
-                        <i class="fa-solid fa-quote-left quote-icon"></i>
-                        <p class="testimonial-text">"A orientação constante da Dra. Gabriela foi um verdadeiro divisor de águas para entendermos as necessidades diárias e ajudarmos diretamente no desenvolvimento do nosso filho de forma efetiva."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar"><i class="fa-solid fa-user"></i></div>
-                            <div>
-                                <h4 class="author-name">Mãe 03</h4>
-                                <span class="author-role">Suporte Integral</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card glass-panel">
-                        <i class="fa-solid fa-quote-left quote-icon"></i>
-                        <p class="testimonial-text">"Incrível como o digital funciona tão bem! O acolhimento online da Gabi tem sido essencial para estruturar a nossa rotina, sempre com paciência e muita capacidade técnica."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar"><i class="fa-solid fa-user"></i></div>
-                            <div>
-                                <h4 class="author-name">Mãe 04</h4>
-                                <span class="author-role">Atendimento Familiar</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card glass-panel">
-                        <i class="fa-solid fa-quote-left quote-icon"></i>
-                        <p class="testimonial-text">"Depois de procurar vários profissionais, finalmente encontrei uma psicóloga que realmente foca na autonomia da criança. O progresso neurodesenvolvimental tem sido nítido."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar"><i class="fa-solid fa-user"></i></div>
-                            <div>
-                                <h4 class="author-name">Mãe 05</h4>
-                                <span class="author-role">Neurodesenvolvimento</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card glass-panel">
-                        <i class="fa-solid fa-quote-left quote-icon"></i>
-                        <p class="testimonial-text">"Profissional super atenciosa, didática e clara. Gostei muito da abordagem analítico-comportamental logo na primeira consulta."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar"><i class="fa-solid fa-user"></i></div>
-                            <div>
-                                <h4 class="author-name">Paciente 01</h4>
-                                <span class="author-role">Atendimento Psicológico</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card glass-panel">
-                        <i class="fa-solid fa-quote-left quote-icon"></i>
-                        <p class="testimonial-text">"Excelente profissional. Me sinto muito confortável nas sessões remotas, o formato online é muito prático e o suporte clínico é exemplar para a minha rotina corrida."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar"><i class="fa-solid fa-user"></i></div>
-                            <div>
-                                <h4 class="author-name">Paciente 02</h4>
-                                <span class="author-role">Terapia Online</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Duplicados para Infinite Scroll Continuo -->
-                    <div class="testimonial-card glass-panel">
-                        <i class="fa-solid fa-quote-left quote-icon"></i>
-                        <p class="testimonial-text">"A Gabriela nos trouxe esperança e técnicas reais. Desde que iniciamos a intervenção ABA online, o desenvolvimento e a autonomia do meu filho evoluíram de uma forma que antes não achávamos possível. O olhar humano que ela tem faz toda a diferença!"</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar"><i class="fa-solid fa-user"></i></div>
-                            <div>
-                                <h4 class="author-name">Mãe 01</h4>
-                                <span class="author-role">Intervenção TEA Online</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-card glass-panel">
-                        <i class="fa-solid fa-quote-left quote-icon"></i>
-                        <p class="testimonial-text">"Como mãe, me sentia perdida diante de várias limitações e não sabia agir. A orientação parental que a Gabi nos fornece em conjunto com a articulação com a escola do meu pequeno trouxeram uma tremenda paz para a nossa casa novamente."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar"><i class="fa-solid fa-user"></i></div>
-                            <div>
-                                <h4 class="author-name">Mãe 02</h4>
-                                <span class="author-role">Orientação Parental</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card glass-panel">
-                        <i class="fa-solid fa-quote-left quote-icon"></i>
-                        <p class="testimonial-text">"A orientação constante da Dra. Gabriela foi um verdadeiro divisor de águas para entendermos as necessidades diárias e ajudarmos diretamente no desenvolvimento do nosso filho de forma efetiva."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar"><i class="fa-solid fa-user"></i></div>
-                            <div>
-                                <h4 class="author-name">Mãe 03</h4>
-                                <span class="author-role">Suporte Integral</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card glass-panel">
-                        <i class="fa-solid fa-quote-left quote-icon"></i>
-                        <p class="testimonial-text">"Incrível como o digital funciona tão bem! O acolhimento online da Gabi tem sido essencial para estruturar a nossa rotina, sempre com paciência e muita capacidade técnica."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar"><i class="fa-solid fa-user"></i></div>
-                            <div>
-                                <h4 class="author-name">Mãe 04</h4>
-                                <span class="author-role">Atendimento Familiar</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card glass-panel">
-                        <i class="fa-solid fa-quote-left quote-icon"></i>
-                        <p class="testimonial-text">"Depois de procurar vários profissionais, finalmente encontrei uma psicóloga que realmente foca na autonomia da criança. O progresso neurodesenvolvimental tem sido nítido."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar"><i class="fa-solid fa-user"></i></div>
-                            <div>
-                                <h4 class="author-name">Mãe 05</h4>
-                                <span class="author-role">Neurodesenvolvimento</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card glass-panel">
-                        <i class="fa-solid fa-quote-left quote-icon"></i>
-                        <p class="testimonial-text">"Profissional super atenciosa, didática e clara. Gostei muito da abordagem analítico-comportamental logo na primeira consulta."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar"><i class="fa-solid fa-user"></i></div>
-                            <div>
-                                <h4 class="author-name">Paciente 01</h4>
-                                <span class="author-role">Atendimento Psicológico</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card glass-panel">
-                        <i class="fa-solid fa-quote-left quote-icon"></i>
-                        <p class="testimonial-text">"Excelente profissional. Me sinto muito confortável nas sessões remotas, o formato online é muito prático e o suporte clínico é exemplar para a minha rotina corrida."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar"><i class="fa-solid fa-user"></i></div>
-                            <div>
-                                <h4 class="author-name">Paciente 02</h4>
-                                <span class="author-role">Terapia Online</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer & Final CTA Section -->
-    <footer class="footer" style="position: relative; overflow: hidden;">
-        <div class="glow-orb orb-5"></div>
-        <div class="cta-banner container glass-panel hidden">
-            <div class="cta-content">
-                <h2>Pronta(o) para iniciar essa jornada?</h2>
-                <p>Agende uma conversa online e vamos construir, passo a passo, caminhos para fortalecer sua família.</p>
-            </div>
-            <a href="https://wa.me/5519993730000" class="btn btn-primary btn-large" target="_blank">
-                <i class="fa-brands fa-whatsapp"></i> Agende uma conversa
-            </a>
-        </div>
-        
-        <div class="container footer-content">
-            <div class="footer-brand hidden">
-                <img src="Imagens/Logo.png" alt="Dra. Gabriela Sarra" style="height: 170px; display: block; margin-bottom: 20px;">
-                <p>Psicologia com rigor técnico e olhar humano. Atendimento clínico especializado 100% online.</p>
-            </div>
-            <div class="footer-contact hidden delay-1">
-                <h4>Contatos</h4>
-                <ul>
-                    <li><a href="https://wa.me/5519993730000"><i class="fa-brands fa-whatsapp"></i> +55 19 99373-0000</a></li>
-                    <li><a href="mailto:gabysarra23@gmail.com"><i class="fa-regular fa-envelope"></i> gabysarra23@gmail.com</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Dra. Gabriela Sarra. Todos os direitos reservados.</p>
-        </div>
+        <div class="container footer-bottom"><p>© 2026 Dra. Gabriela Sarra. Todos os direitos reservados.</p><a href="#inicio">Voltar ao início <span aria-hidden="true">↑</span></a></div>
     </footer>
-
-    <script src="main.js"></script>
 </body>
 </html>

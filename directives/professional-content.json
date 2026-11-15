@@ -1,0 +1,65 @@
+[
+  {
+    "date": "Fev 2020 – Dez 2021",
+    "title": "Psicologia (Ingresso Inicial)",
+    "inst": "PUC Campinas",
+    "desc": "Pontifícia Universidade Católica de Campinas.",
+    "tag": "Graduação"
+  },
+  {
+    "date": "Fev 2022 – Dez 2024",
+    "title": "Bacharelado em Psicologia",
+    "inst": "UNISAL",
+    "desc": "Centro Universitário Salesiano de São Paulo.",
+    "tag": "Bacharelado"
+  },
+  {
+    "date": "Fev 2025 – Fev 2026",
+    "title": "Especialização em Neuropsicologia",
+    "inst": "Universidade Anhembi Morumbi (UAM)",
+    "desc": "Pós-graduação Lato Sensu — Intervenções psicológicas e saúde comportamental.",
+    "tag": "Pós-graduação"
+  },
+  {
+    "date": "Ago 2025 – Fev 2026",
+    "title": "Especialização em ABA",
+    "inst": "Faculdade Líbano",
+    "desc": "Pós-graduação Lato Sensu — Análise do comportamento aplicada.",
+    "tag": "Pós-graduação"
+  },
+  {
+    "date": "Out 2023 – Fev 2025",
+    "title": "Acompanhante Terapêutica",
+    "inst": "PHS Samaritano Saúde",
+    "desc": "Atuação com análise de comportamento aplicada e intervenções psicológicas.",
+    "tag": "Clínico"
+  },
+  {
+    "date": "Fev 2024 – Dez 2024",
+    "title": "Estagiária de Psicologia",
+    "inst": "Obra Social Casa de Dom Bosco",
+    "desc": "Intervenção psicossocial com adolescentes do Serviço de Convivência e Fortalecimento de Vínculos com o objetivo de fortalecer o sujeito frente à sua história.",
+    "tag": "Social"
+  },
+  {
+    "date": "Mar 2025 – Dez 2025",
+    "title": "Psicóloga Clínica",
+    "inst": "Clínica de Asas",
+    "desc": "Atendimento clínico baseado na abordagem Analítico-Comportamental, direcionado ao público infantil e adolescente.",
+    "tag": "Clínico"
+  },
+  {
+    "date": "Mar 2025 – O momento",
+    "title": "Psicóloga",
+    "inst": "PHS Samaritano Saúde",
+    "desc": "Atuação com análise de comportamento aplicada integrando equipes médicas e clínicas.",
+    "tag": "Atual"
+  },
+  {
+    "date": "Ago 2025 – O momento",
+    "title": "Psicóloga Autônoma",
+    "inst": "Clínica Particular",
+    "desc": "Atendimentos psicoterapêuticos para promover bem-estar e saúde mental, com foco clínico.",
+    "tag": "Atual"
+  }
+]
