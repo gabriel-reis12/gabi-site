@@ -45,7 +45,7 @@ for (const [link] of html.matchAll(/<a\b[^>]*>/g)) {
 assert.match(html, /mailto:gabysarra23@gmail.com/);
 assert.match(html, /CRP 06\/215390/);
 assert.match(html, /50 minutos/);
-assert.match(html, /Atendimento exclusivamente online/);
+assert.match(html, /Atendimento online e presencial/);
 for (const record of records) for (const value of Object.values(record)) assert.ok(html.includes(value), `Professional content changed: ${value}`);
 assert.doesNotMatch(html, /brain\.jpg|Imagens Intro|testimonial|Mãe 0|Paciente 0/);
 assert.match(css, /prefers-reduced-motion: reduce/);
@@ -92,4 +92,4 @@ for (const [label, foreground, background] of pairs) {
     assert.ok(ratio >= 4.5, `${label}: insufficient contrast ${ratio}`);
     console.log(`Contrast ${label}: ${ratio.toFixed(2)}:1`);
 }
-console.log(`PASS: ${ids.length} ids, ${localPaths.size} local assets, 9 original professional records, contact links, HTML structure, CSS tokens, JS syntax.`);
+console.log(`PASS: ${ids.length} ids, ${localPaths.size} local assets, ${records.length} professional records, contact links, HTML structure, CSS tokens, JS syntax.`);
